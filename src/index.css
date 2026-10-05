@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 45 40% 92%;
+    --foreground: 222 51% 16%;
+    --card: 45 38% 95%;
+    --card-foreground: 222 51% 16%;
+    --popover: 45 38% 95%;
+    --popover-foreground: 222 51% 16%;
+    --primary: 222 51% 16%;
+    --primary-foreground: 45 40% 95%;
+    --secondary: 44 32% 86%;
+    --secondary-foreground: 222 51% 16%;
+    --muted: 44 32% 86%;
+    --muted-foreground: 222 25% 40%;
+    --accent: 37 97% 53%;
+    --accent-foreground: 222 51% 16%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 45 40% 95%;
+    --border: 222 25% 16% / 0.14;
+    --input: 222 25% 16% / 0.2;
+    --ring: 37 97% 53%;
+    --radius: 0.75rem;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #F4EFE2;
+  color: #14213D;
+  font-family: 'Geist', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(252, 163, 17, 0.45);
+  color: #14213D;
+}
+
+/* Amber thumb scrollbar on dark track, per reference craft */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #EAE3D0;
+}
+::-webkit-scrollbar-thumb {
+  background: #14213D;
+  border-radius: 999px;
+  border: 2px solid #EAE3D0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FCA311;
+}
+
+:focus-visible {
+  outline: 2px solid #FCA311;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Ambient pulse on kicker dot (1.8s expanding ring) */
+@keyframes pulse-dot {
+  0% {
+    box-shadow: 0 0 0 0 rgba(252, 163, 17, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(252, 163, 17, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(252, 163, 17, 0);
+  }
+}
+.animate-pulse-dot {
+  animation: pulse-dot 1.8s ease-out infinite;
+}
+
+/* Rotating deal sticker text ring (20s linear) */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* Card hover: subtle lift + shadow-pop */
+.card-lift {
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+.card-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px -12px rgba(20, 33, 61, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse-dot,
+  .animate-spin-slow {
+    animation: none;
+  }
+  .card-lift,
+  .card-lift:hover {
+    transition: none;
+    transform: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
